@@ -3,8 +3,8 @@ name: Express Server Testing
 on:
   push:
     branches: [main]
-  workflow_dispatch:
-  
+  workflow_dispatch: 
+
 
 jobs:
   runs_server_tests:
