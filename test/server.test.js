@@ -1,0 +1,32 @@
+// Test the routes from server.js 
+
+const {app} = require('../src/server');
+
+const request = require('supertest');
+
+// Import supertest so we can manage the app/server in tests properly
+describe("Server root route exists and returns hello world", () => {
+	test("Root route exists and returns status 200", async () => {
+    const responseResult = await request(app).get("/");
+    expect(responseResult.statusCode).toEqual(200);
+	});
+
+	test("Root route exists and returns hello world message", async () => {
+    const response = await request(app).get("/");
+    expect(response.body.message).toEqual("Hello world!");
+	});
+});
+
+describe("POST to root route copies message in request body", () => {
+  test('Post request.body.message of "Hello world" returns received value of "Hello world"', async () => {
+    const response = await request(app)
+    .post("/")
+    .send({
+      message: "Hello world"
+    });
+
+    expect(response.body.received).toEqual("Hello world");
+
+    
+  });
+});
